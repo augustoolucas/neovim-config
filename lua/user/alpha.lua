@@ -8,12 +8,12 @@ function M.config()
   local alpha = require "alpha"
   local dashboard = require "alpha.themes.dashboard"
   dashboard.section.header.val = {
-    [[                               __                ]],
-    [[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
-    [[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
-    [[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
-    [[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
-    [[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
+   [[                                                ]],
+   [[ /\ |\   _ __    ___   ___ __   __(_) _ __ ___  ]],
+   [[|  \| | | '_ \  / _ \ / _ \\ \ / /|¯|| '_ ` _ \ ]],
+   [[| . ` | | | | ||  __/| (_) |\ V / | || | | | | |]],
+   [[| |\  | |_| |_| \___| \___/  \_/  |_||_| |_| |_|]],
+   [[ \| \/                                          ]]
   }
   dashboard.section.buttons.val = {
     dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
@@ -25,7 +25,7 @@ function M.config()
     dashboard.button("q", " " .. " Quit", ":qa<CR>"),
   }
   local function footer()
-    return "chrisatmachine.com"
+    return "Lucas Alcantara"
   end
 
   dashboard.section.footer.val = footer()
