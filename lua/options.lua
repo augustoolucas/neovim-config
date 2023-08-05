@@ -43,6 +43,7 @@ vim.opt.formatoptions:remove { "c", "r", "o" }  -- This is a sequence of letters
 vim.opt.linebreak = true
 vim.opt.relativenumber = true
 vim.opt.colorcolumn = "80"
+vim.opt.equalalways = false
 
 vim.g.python3_host_prog = "~/.neovim-venv/bin/python3"
 
@@ -51,17 +52,5 @@ vim.cmd [[
     au!
     au BufEnter,WinEnter,WinNew,VimResized *,*.*
           \ let &scrolloff=winheight(win_getid())/2
-  augroup END
-]]
-
-vim.cmd [[
-  autocmd VimEnter *
-            \ Vexplore |
-            \ execute "vertical res" . string(&columns * 0.125) |
-            \ execute "wincmd l" |
-            \ split |
-            \ execute "term zsh" |
-            \ execute "res" . string(&lines * 0.15) |
-            \ execute "wincmd k" 
   augroup END
 ]]
