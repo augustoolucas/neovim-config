@@ -63,9 +63,9 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
 
   vim.cmd [[NvimTreeToggle]]
   vim.cmd [[wincmd l]]
-  vim.cmd [[split]]
-  vim.cmd [[term zsh]]
-  vim.api.nvim_command("res " .. tostring(res))
+  -- vim.cmd [[split]]
+  -- vim.cmd [[term zsh]]
+  -- vim.api.nvim_command("res " .. tostring(res))
 
   vim.g.my_callback_has_run = true
   vim.cmd [[wincmd p]]
