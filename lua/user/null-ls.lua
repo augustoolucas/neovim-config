@@ -26,6 +26,7 @@ function M.config()
         extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
       },
       formatting.black.with { extra_args = { "--fast" } },
+      formatting.isort,
       formatting.stylua,
       formatting.google_java_format,
       diagnostics.flake8,
