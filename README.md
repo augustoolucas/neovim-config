@@ -1,4 +1,4 @@
-## Neovim Configuration Files Repository
+## Neovim Configuration Files
 
 This repository contains my configuration files for the Neovim editor. Follow the instructions below to install dependencies, compile Neovim, clone and set up the repository, and perform health checks.
 
