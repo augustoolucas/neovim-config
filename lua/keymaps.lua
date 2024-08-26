@@ -85,4 +85,13 @@ keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", opt
 -- ChatGPT
 keymap("n", "<C-g>", "<cmd>ChatGPT<CR>", opts)
 
+-- Exit insert mode in :term
 keymap("t", "<ESC>", "<C-\\><C-n>", opts)
+
+-- Moving lines
+keymap("n", "<A-j>", ":m .+1<CR>==", opts)
+keymap("n", "<A-k>", ":m .-2<CR>==", opts)
+keymap("i", "<A-j>", "<ESC>:m .+1<CR>==gi", opts)
+keymap("i", "<A-k>", "<ESC>:m .-2<CR>==gi", opts)
+keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
+keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
