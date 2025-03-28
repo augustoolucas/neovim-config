@@ -19,7 +19,12 @@ This repository contains my configuration files for the Neovim editor. Follow th
    python3 -m venv ~/.neovim-venv
    ```
 
-2. **Neovim Installation**
+   After that:
+   ˋˋˋbash
+   pip install flak8 isort black pyright
+   ˋˋˋ
+
+3. **Neovim Installation**
   
    I've tested it with Neovim 0.10.1 on Ubuntu 22.04, and I needed to build it from source to make it work with this configuration. I'm not entirely sure why. On Ubuntu 24.04, it wasn't necessary to build it; simply installing it with Snap worked for me. 
 
