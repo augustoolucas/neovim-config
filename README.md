@@ -20,9 +20,9 @@ This repository contains my configuration files for the Neovim editor. Follow th
    ```
 
    After that:
-   ˋˋˋbash
+   ```bash
    pip install flak8 isort black pyright
-   ˋˋˋ
+   ```
 
 3. **Neovim Installation**
   
