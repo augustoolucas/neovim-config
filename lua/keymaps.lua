@@ -44,6 +44,11 @@ keymap("v", "p", "P", opts)
 -- Insert --
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
+keymap("i", "kj", "<ESC>", opts)
+keymap("v", "jk", "<ESC>", opts)
+keymap("v", "kj", "<ESC>", opts)
+keymap("t", "jk", "<ESC>", opts)
+keymap("t", "kj", "<ESC>", opts)
 
 -- Visual --
 -- Stay in indent mode
@@ -87,6 +92,8 @@ keymap("n", "<C-g>", "<cmd>ChatGPT<CR>", opts)
 
 -- Exit insert mode in :term
 keymap("t", "<ESC>", "<C-\\><C-n>", opts)
+keymap("t", "jk", "<C-\\><C-n>", opts)
+keymap("t", "kj", "<C-\\><C-n>", opts)
 
 -- Moving lines
 keymap("n", "<A-j>", ":m .+1<CR>==", opts)
