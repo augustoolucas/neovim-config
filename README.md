@@ -1,64 +1,95 @@
-## Neovim Configuration Files
+```
+    ✯                              .°•    |    
+    __     °    •                __      / \   
+   / /   ____ ___  ______  _____/ /_    | O |  
+  / /   / __ `/ / / / __ \/ ___/ __ \   | O |  
+ / /___/ /_/ / /_/ / / / / /__/ / / /  /| | |\ 
+/_____/\__,_/\__,_/_/ /_/\___/_/ /_/  /_(.|.)_\
+```
 
-This repository contains my configuration files for the Neovim editor. Follow the instructions below to install dependencies, compile Neovim, clone and set up the repository, and perform health checks.
+This config will provide a modular starting point for anyone looking to use Neovim as their IDE. It is meant to be simple and easy to understand and extend. Use it as a base for your own config or just take individual pieces.
 
-**Prerequisites**
+All the included plugins are pinned to a version that ensures they are compatible and will not update potentially introducing errors into your config. For every Neovim release I will update this repo along with the community to keep it up to date with the newest versions.
 
-- **Compatible operating system**: The guide assumes a Debian/Ubuntu-based system.
-- **Basic knowledge**: Familiarity with the terminal and basic Git concepts.
+As I mentioned, this config is meant as a starting point for people new to Neovim who want a familiar IDE experience. The config has a very simple structure that makes it easy to add new plugins.
 
-**Installation and Configuration Steps**
+## Install Neovim 0.9
 
-1. **Install Dependencies**
+You can install Neovim with your package manager e.g. brew, apt, pacman etc.. bus remember that when you update your packages Neovim may be upgraded to a newer version.
 
-   ```bash
-   curl -fsSL https://deb.nodesource.com/setup_20.x | sudo bash -
-   sudo apt update
-   sudo apt install python3-pip python3-venv python3-pynvim nodejs git lua5.1 luarocks ripgrep ninja-build gettext cmake unzip curl build-essential
-   sudo npm install -g neovim
-   python3 -m venv ~/.neovim-venv
-   ```
+If you would like to make sure Neovim only updates when you want it to than I recommend installing from source: [instructions](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-source)
 
-   After that:
-   ```bash
-   pip install flak8 isort black pyright neovim
-   ```
+## Install the config
 
-3. **Neovim Installation**
-  
-   I've tested it with Neovim 0.10.1 on Ubuntu 22.04, and I needed to build it from source to make it work with this configuration. I'm not entirely sure why. On Ubuntu 24.04, it wasn't necessary to build it; simply installing it with Snap worked for me. 
+Make sure to remove or backup your current `nvim` directory
 
-   - Follow the official Neovim build instructions: [https://github.com/neovim/neovim/blob/master/BUILD.md](https://github.com/neovim/neovim/blob/master/BUILD.md)
-   - Use the `v0.10.1` branch.
-   - After compiling, set the `VIMRUNTIME` environment variable to point to the `runtime` folder of the Neovim repository.
+```sh
+git clone https://github.com/LunarVim/Launch.nvim.git ~/.config/nvim
+```
 
-5. **Clone the Configuration Repository**
+Run `nvim` and wait for the plugins to be installed
 
-   ```bash
-   git clone https://github.com/augustoolucas/neovim-config.git
-   ```
+**NOTE** (You will notice treesitter pulling in a bunch of parsers the next time you open Neovim)
 
-6. **Move the Repository to the Configuration Folder**
+## Get healthy
 
-   ```bash
-   mv <path_to_cloned_repository>/neovim-config ~/.config/nvim
-   ```
+Open `nvim` and enter the following:
 
-7. **Run Neovim and Wait for Package Installation**
+```
+:checkhealth
+```
 
-   - Run Neovim (`nvim`). The `Lazy` plugin will automatically start installing packages. Wait for it to finish.
+You'll probably notice you don't have support for copy/paste also that python and node haven't been setup
 
-8. **Restart Neovim**
+So let's fix that
 
-   - Close and reopen Neovim (`nvim`).
+First we'll fix copy/paste
 
-9. **Run Configuration Commands**
+- On mac `pbcopy` should be builtin
 
-   - Run the following commands inside Neovim:
-     - `:Mason`
-     - `:Lazy update`
-     - `:Lazy sync`
+- On Ubuntu
 
-10. **Check Configuration Health**
+  ```sh
+  sudo apt install xsel # for X11
+  sudo apt install wl-clipboard # for wayland
+  ```
 
-   - Run `:checkhealth` to ensure everything is working correctly. If there are any issues, Neovim will display error messages.
+Next we need to install python support (node is optional)
+
+- Neovim python support
+
+  ```sh
+  pip install pynvim
+  ```
+
+- Neovim node support
+
+  ```sh
+  npm i -g neovim
+  ```
+
+We will also need `ripgrep` for Telescope to work:
+
+- Ripgrep
+
+  ```sh
+  sudo apt install ripgrep
+  ```
+
+---
+
+**NOTE** make sure you have [node](https://nodejs.org/en/) installed, I recommend a node manager like [fnm](https://github.com/Schniz/fnm).
+
+## Fonts
+
+I recommend using the following repo to get a "Nerd Font" (Font that supports icons)
+
+[getnf](https://github.com/ronniedroid/getnf)
+
+**NOTE** Some are already setup as examples, remove them if you want
+
+---
+
+> The computing scientist's main challenge is not to get confused by the complexities of his own making.
+
+\- Edsger W. Dijkstra
