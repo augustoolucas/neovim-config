@@ -6,7 +6,7 @@ local M = {
 
 M.name = "onedark"
 function M.config()
-  vim.cmd.colorscheme "darkplus"
+  vim.cmd.colorscheme "onedark"
 end
 
 return M
