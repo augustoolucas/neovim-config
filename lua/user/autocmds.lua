@@ -74,3 +74,16 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
     end
   end,
 })
+
+local vcenter_group = vim.api.nvim_create_augroup("VCenterCursor", { clear = true })
+
+vim.api.nvim_create_autocmd(
+  { "BufEnter", "WinEnter", "WinNew", "VimResized" },
+  {
+    group = vcenter_group,
+    pattern = "*",
+    callback = function()
+      vim.opt.scrolloff = math.floor(vim.fn.winheight(0) / 2)
+    end,
+  }
+)
