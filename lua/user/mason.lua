@@ -23,6 +23,7 @@ function M.config()
   }
 
   require("mason-lspconfig").setup {
+    automatic_enable = false,
     ensure_installed = servers,
   }
 end
