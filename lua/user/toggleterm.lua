@@ -5,7 +5,7 @@ local M = {
 
 function M.config()
   local execs = {
-    { nil, "<M-1>", "Horizontal Terminal", "horizontal", 0.3 },
+    { nil, "<M-1>", "Horizontal Terminal", "horizontal", 0.2 },
     { nil, "<M-2>", "Vertical Terminal", "vertical", 0.4 },
     { nil, "<M-3>", "Float Terminal", "float", nil },
   }
@@ -53,7 +53,6 @@ function M.config()
 
   for i, exec in pairs(execs) do
     local direction = exec[4]
-
     local opts = {
       cmd = exec[1] or vim.o.shell,
       keymap = exec[2],
@@ -64,23 +63,47 @@ function M.config()
         return get_dynamic_terminal_size(direction, exec[5])
       end,
     }
-
     add_exec(opts)
   end
 
   require("toggleterm").setup {
+    on_open = function(term)
+      if term.direction == "horizontal" then
+        local original_win_id = vim.api.nvim_get_current_win()
+        local nvim_tree_win_id = nil
+        local nvim_tree_width = 0
+        for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+          if vim.bo[vim.api.nvim_win_get_buf(win)].filetype == "NvimTree" then
+            nvim_tree_win_id = win
+            nvim_tree_width = vim.api.nvim_win_get_width(win)
+            break
+          end
+        end
+
+        if nvim_tree_win_id then
+          vim.api.nvim_set_current_win(nvim_tree_win_id)
+          vim.cmd('1')
+          vim.cmd("wincmd H")
+          vim.cmd("vertical res" .. nvim_tree_width)
+          vim.api.nvim_set_current_win(original_win_id)
+          vim.cmd("wincmd =")
+          vim.cmd("startinsert")
+        end
+      end
+    end,
+
     size = 20,
     open_mapping = [[<c-\>]],
-    hide_numbers = true, -- hide the number column in toggleterm buffers
+    hide_numbers = true,
     shade_filetypes = {},
     shade_terminals = true,
-    shading_factor = 2, -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
+    shading_factor = 2,
     start_in_insert = true,
-    insert_mappings = true, -- whether or not the open mapping applies in insert mode
+    insert_mappings = true,
     persist_size = false,
     direction = "float",
-    close_on_exit = true, -- close the terminal window when the process exits
-    shell = nil, -- change the default shell
+    close_on_exit = true,
+    shell = nil,
     float_opts = {
       border = "rounded",
       winblend = 0,
@@ -91,7 +114,7 @@ function M.config()
     },
     winbar = {
       enabled = true,
-      name_formatter = function(term) --  term: Terminal
+      name_formatter = function(term)
         return term.count
       end,
     },
