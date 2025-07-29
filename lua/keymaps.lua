@@ -79,7 +79,7 @@ keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", opts)
 
 -- ChatGPT
-keymap("n", "<C-g>", "<cmd>ChatGPT<CR>", opts)
+-- keymap("n", "<C-g>", "<cmd>ChatGPT<CR>", opts)
 
 -- Exit insert mode in :term
 keymap("t", "<ESC>", "<C-\\><C-n>", opts)
@@ -93,3 +93,5 @@ keymap("i", "<A-j>", "<ESC>:m .+1<CR>==gi", opts)
 keymap("i", "<A-k>", "<ESC>:m .-2<CR>==gi", opts)
 keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
 keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
+
+keymap("n", "<leader>bd", ":bnext | bdelete #<CR>", opts)
