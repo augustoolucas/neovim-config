@@ -5,6 +5,7 @@ local M = {
     "nvim-lua/plenary.nvim",
   },
   -- lazy = true,
+  event = "VeryLazy",
   cmd = "Telescope",
 }
 
@@ -72,8 +73,8 @@ function M.config()
       },
 
       find_files = {
-        theme = "dropdown",
-        previewer = false,
+        -- theme = "dropdown",
+        previewer = true,
       },
 
       buffers = {
