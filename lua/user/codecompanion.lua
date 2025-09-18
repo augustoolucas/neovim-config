@@ -44,7 +44,7 @@ function M.config()
               },
             },
             env = {
-              api_key = "AIzaSyBm0qZUYfM-ijEvN2l7hmSM2k3o9XWkWUA",
+              api_key = "API_KEY",
             },
           })
         end,
