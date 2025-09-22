@@ -15,7 +15,7 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
   keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+  -- keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 end
 
@@ -24,15 +24,6 @@ M.on_attach = function(client, bufnr)
 
   if client:supports_method "textDocument/inlayHint" then
     vim.lsp.inlay_hint.enable(true, { bufnr })
-  end
-  if client.supports_method "textDocument/formatting" then
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      group = vim.api.nvim_create_augroup("LspFormatOnSave", { clear = true }),
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.format({ bufnr = bufnr, async = false })
-      end,
-    })
   end
 end
 

@@ -87,3 +87,17 @@ vim.api.nvim_create_autocmd(
     end,
   }
 )
+
+-- Adicione ao final do arquivo: lua/user/autocmds.lua
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = vim.api.nvim_create_augroup("FormatOnSave", { clear = true }),
+  pattern = "*",
+  callback = function(args)
+    vim.lsp.buf.format({
+      bufnr = args.buf,
+      async = false, -- A chave da solução: executa de forma síncrona
+      timeout_ms = 5000, -- Define um tempo limite generoso de 5 segundos
+    })
+  end,
+})
