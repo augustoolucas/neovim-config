@@ -6,8 +6,29 @@ local M = {
   },
 }
 
+local function get_gemini_api_key()
+  local handle = io.popen("pass show gemini_api_key")
+  if not handle then
+    print("Could not execute 'pass show gemini_api_key'")
+    return nil
+  end
+  local api_key = handle:read("*a")
+  handle:close()
+  if api_key then
+    return string.sub(api_key, 1, string.len(api_key) - 1)
+  else
+    print("Could not read API key from app pass")
+    return nil
+  end
+end
+
 function M.config()
   require("codecompanion").setup({
+    display = {
+      inline = {
+        layout = "vertical",
+      }
+    },
     strategies = {
       chat = {
         adapter = "gemini"
@@ -40,11 +61,11 @@ function M.config()
           return require("codecompanion.adapters").extend("gemini", {
             schema = {
               model = {
-                default = "gemini-2.0-flash",
+                default = "gemini-2.5-pro",
               },
             },
             env = {
-              api_key = "API_KEY",
+              api_key = get_gemini_api_key(),
             },
           })
         end,
