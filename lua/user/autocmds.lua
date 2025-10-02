@@ -68,8 +68,6 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
       return
     end
     if luasnip.expand_or_jumpable() then
-      -- ask maintainer for option to make this silent
-      -- luasnip.unlink_current()
       vim.cmd [[silent! lua require("luasnip").unlink_current()]]
     end
   end,
@@ -77,6 +75,7 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
 
 local vcenter_group = vim.api.nvim_create_augroup("VCenterCursor", { clear = true })
 
+-- Center Cursor
 vim.api.nvim_create_autocmd(
   { "BufEnter", "WinEnter", "WinNew", "VimResized" },
   {
