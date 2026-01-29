@@ -82,6 +82,18 @@ function M.config()
             },
           })
         end,
+        openai = function()
+          return require("codecompanion.adapters").extend("openai", {
+            schema = {
+              model = {
+                default = "gpt-4.1",
+              },
+            },
+            env = {
+              api_key = "API_KEY",
+            },
+          })
+        end,
       },
     },
   })
