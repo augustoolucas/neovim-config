@@ -54,3 +54,7 @@ vim.cmd [[set iskeyword+=-]]
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.python3_host_prog = "/home/lucas/.neovim-venv/bin/python3"
+
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldlevel = 99
