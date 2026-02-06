@@ -8,6 +8,9 @@ local M = {
 
 function M.config()
   require("codecompanion").setup({
+    opts = {
+      language = "Português Brasileiro",
+    },
     display = {
       inline = {
         layout = "vertical",
@@ -33,11 +36,14 @@ function M.config()
           return require("codecompanion.adapters").extend("openai", {
             schema = {
               model = {
-                default = "gpt-5.1",
+                default = "gpt-5-mini",
+              },
+              max_completion_tokens = {
+                default = 1024,
               },
             },
             env = {
-              api_key = "API_KEY",
+              api_key = "NEOVIM_AI_API_KEY",
             },
           })
         end,

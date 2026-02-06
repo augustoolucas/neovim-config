@@ -138,7 +138,6 @@ function M.config()
       { name = "path" },
       { name = "calc" },
       { name = "emoji" },
-      { name = "codecompanion" },
     },
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,
