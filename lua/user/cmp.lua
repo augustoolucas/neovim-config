@@ -65,14 +65,11 @@ function M.config()
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+      ["<Tab>"] = cmp.mapping.confirm({ select = true }),
       ["<C-e>"] = cmp.mapping {
         i = cmp.mapping.abort(),
         c = cmp.mapping.close(),
       },
-      -- Accept currently selected item. If none selected, `select` first item.
-      -- Set `select` to `false` to only confirm explicitly selected items.
-      -- ["<CR>"] = cmp.mapping.confirm { select = true },
-      -- ["<Tab>"] = cmp.mapping(function(fallback)
       ["<C-n>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -134,10 +131,31 @@ function M.config()
       { name = "luasnip" },
       { name = "cmp_tabnine" },
       { name = "nvim_lua" },
-      { name = "buffer" },
       { name = "path" },
       { name = "calc" },
       { name = "emoji" },
+      {
+        name = "buffer",
+        option = {
+          keyword_length = 1,
+          -- Only use buffers that are currently visible in any window.
+          -- This keeps completion sources focused on the currently shown files.
+          get_bufnrs = function()
+            local bufs = {}
+            local seen = {}
+            for _, win in ipairs(vim.api.nvim_list_wins()) do
+              local buf = vim.api.nvim_win_get_buf(win)
+              if vim.api.nvim_buf_is_loaded(buf) and not seen[buf] then
+                table.insert(bufs, buf)
+                seen[buf] = true
+              end
+            end
+            return bufs
+          end,
+          use_visible = true,
+          use_hidden = false,
+        }
+      }
     },
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,
