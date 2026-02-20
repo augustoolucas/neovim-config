@@ -89,6 +89,11 @@ function M.config()
           vim.cmd("wincmd =")
           vim.cmd("startinsert")
         end
+      elseif term.direction == "vertical" then
+        -- quando abrir terminal vertical, equaliza larguras (comportamento de <C-W>=)
+        vim.schedule(function()
+          vim.cmd("wincmd =")
+        end)
       end
     end,
 
