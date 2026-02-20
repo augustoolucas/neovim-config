@@ -9,6 +9,7 @@ function M.config()
   require('minuet').setup {
     provider = "openai",
     context_window = 512,
+    notify = 'debug',
     provider_options = {
       openai = {
         model = "gpt-5-mini",
