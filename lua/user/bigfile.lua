@@ -1,4 +1,3 @@
--- lazy configuration of LunarVim/bigfile.nvim
 local M = {
   "LunarVim/bigfile.nvim",
   event = "BufReadPre",
