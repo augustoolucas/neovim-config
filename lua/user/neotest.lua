@@ -19,6 +19,7 @@ local M = {
 function M.config()
   local wk = require "which-key"
   wk.add {
+    { "<leader>t", group = "Test" },
     { "<leader>tt", "<cmd>lua require'neotest'.run.run()<cr>", desc = "Test Nearest" },
     { "<leader>tf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", desc = "Test File" },
     { "<leader>td", "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", desc = "Debug Test" },

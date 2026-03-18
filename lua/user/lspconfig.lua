@@ -41,6 +41,7 @@ end
 function M.config()
   local wk = require "which-key"
   wk.add {
+    { "<leader>l", group = "LSP" },
     { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
     {
       "<leader>lf",
@@ -56,11 +57,6 @@ function M.config()
     { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename" },
   }
 
-  wk.add {
-    { "<leader>la", group = "LSP" },
-    { "<leader>laa", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action", mode = "v" },
-  }
-
   local icons = require "user.icons"
 
   local servers = {
@@ -74,7 +70,7 @@ function M.config()
     "bashls",
     "jsonls",
     "yamlls",
-    "ruff"
+    "ruff",
   }
 
   local default_diagnostic_config = {
