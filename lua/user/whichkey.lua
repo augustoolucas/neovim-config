@@ -57,6 +57,7 @@ function M.config()
       buftypes = {},
       filetypes = { "TelescopePrompt" },
     },
+    triggers = { { "<leader>", mode = { "n", "v" } } },
   }
 end
 
