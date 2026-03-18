@@ -1,12 +1,18 @@
 local M = {
-  "joshdick/onedark.vim",
-  lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+  "navarasu/onedark.nvim",
+  lazy = false, -- make sure we load this during startup if it is your main colorscheme
   priority = 1000, -- make sure to load this before all the other start plugins
 }
 
 M.name = "onedark"
 function M.config()
-  vim.cmd.colorscheme "onedark"
+  require("onedark").setup {
+    highlights = {
+      WinSeparator = { fg = "#191919" },
+    },
+    style = "dark",
+  }
+  require("onedark").load()
 end
 
 return M
