@@ -1,6 +1,9 @@
 local M = {
   "neogitorg/neogit",
   event = "VeryLazy",
+  dependencies = {
+    "sindrets/diffview.nvim",
+  },
 }
 
 function M.config()
@@ -12,10 +15,13 @@ function M.config()
 
   require("neogit").setup {
     auto_refresh = true,
+    integrations = {
+      diffview = true,
+    },
     disable_builtin_notifications = false,
     use_magit_keybindings = false,
     -- Change the default way of opening neogit
-    kind = "tab",
+    kind = "floating",
     -- Change the default way of opening the commit popup
     commit_popup = {
       kind = "split",
