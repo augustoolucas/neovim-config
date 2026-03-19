@@ -41,7 +41,6 @@ end
 function M.config()
   local wk = require "which-key"
   wk.add {
-    { "<leader>l", group = "LSP" },
     { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
     {
       "<leader>lf",
