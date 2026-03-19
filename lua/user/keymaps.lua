@@ -33,7 +33,7 @@ keymap("v", "jk", "<ESC>", opts)
 keymap("v", "kj", "<ESC>", opts)
 
 -- Exit insert mode in :term
-keymap("t", "<ESC>", "<C-\\><C-n>", opts)
+keymap("t", "<ESC><ESC>", "<C-\\><C-n>", opts)
 keymap("t", "jk", "<C-\\><C-n>", opts)
 keymap("t", "kj", "<C-\\><C-n>", opts)
 
@@ -44,5 +44,3 @@ keymap("i", "<A-j>", "<ESC>:m .+1<CR>==gi", opts)
 keymap("i", "<A-k>", "<ESC>:m .-2<CR>==gi", opts)
 keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
 keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
-
-
