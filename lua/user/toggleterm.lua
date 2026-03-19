@@ -82,17 +82,20 @@ function M.config()
 
         if nvim_tree_win_id then
           vim.api.nvim_set_current_win(nvim_tree_win_id)
-          vim.cmd('1')
-          vim.cmd("wincmd H")
+          vim.cmd "1"
+          vim.cmd "wincmd H"
           vim.cmd("vertical res" .. nvim_tree_width)
           vim.api.nvim_set_current_win(original_win_id)
-          vim.cmd("wincmd =")
-          vim.cmd("startinsert")
+          vim.cmd "wincmd ="
+          vim.cmd "startinsert"
         end
       elseif term.direction == "vertical" then
         -- quando abrir terminal vertical, equaliza larguras (comportamento de <C-W>=)
+        if term.window and vim.api.nvim_win_is_valid(term.window) then
+          vim.api.nvim_set_option_value("winfixwidth", false, { scope = "local", win = term.window })
+        end
         vim.schedule(function()
-          vim.cmd("wincmd =")
+          vim.cmd "wincmd ="
         end)
       end
     end,

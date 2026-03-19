@@ -40,10 +40,6 @@ function M.config()
 
   wk.add {
     {
-      "<leader>o",
-      group = "Opencode",
-    },
-    {
       "<leader>oa",
       function()
         require("opencode").ask("@this: ", { submit = true })
@@ -58,9 +54,12 @@ function M.config()
       desc = "Execute OpenCode Action...",
     },
     {
-      "<leader>ot",
+      "<leader>oo",
       function()
         require("opencode").toggle()
+        vim.schedule(function()
+          vim.cmd "wincmd ="
+        end)
       end,
       desc = "Toggle OpenCode",
     },
@@ -96,22 +95,6 @@ function M.config()
         require("opencode").command "session.half.page.down"
       end,
       desc = "Scroll opencode down",
-      mode = { "n" },
-    },
-  }
-
-  -- increment/decrement (removido das keymaps antigas; use <leader>o+ / <leader>o-)
-  wk.add {
-    {
-      "<leader>o+",
-      "<C-a>",
-      desc = "Increment under cursor",
-      mode = { "n" },
-    },
-    {
-      "<leader>o-",
-      "<C-x>",
-      desc = "Decrement under cursor",
       mode = { "n" },
     },
   }
