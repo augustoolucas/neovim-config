@@ -7,6 +7,7 @@ local M = {
 }
 
 function M.config()
+  local wk = require "which-key"
   require("codecompanion").setup {
     opts = {
       language = "Português Brasileiro",
@@ -55,6 +56,27 @@ function M.config()
     },
   }
 
+  wk.add {
+    {
+      "<leader>c",
+      group = "CodeCompanion",
+    },
+    {
+      "<leader>cc",
+      "<cmd>CodeCompanionChat Toggle<cr>",
+      desc = "Toggle CodeCompanionChat",
+    },
+    {
+      "<leader>ca",
+      "<cmd>CodeCompanionActions<cr>",
+      desc = "CodeCompanion Actions",
+    },
+    {
+      "<leader>ci",
+      "<cmd>CodeCompanion<cr>",
+      desc = "CodeCompanion Inline",
+    },
+  }
   -- Equaliza as larguras das janelas quando o CodeCompanion abrir (evita bagunçar o layout)
   local group = vim.api.nvim_create_augroup("CodeCompanionEqualize", { clear = true })
   vim.api.nvim_create_autocmd("BufWinEnter", {
