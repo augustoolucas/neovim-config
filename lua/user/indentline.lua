@@ -8,10 +8,10 @@ function M.config()
   local icons = require "user.icons"
 
   require("ibl").setup {
-    indent = { 
+    indent = {
       char = icons.ui.LineMiddle,
     },
-    scope = { 
+    scope = {
       enabled = true,
       char = icons.ui.LineMiddle,
     },
