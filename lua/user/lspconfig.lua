@@ -1,11 +1,6 @@
 local M = {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
-  dependencies = {
-    {
-      "folke/neodev.nvim",
-    },
-  },
 }
 
 local function lsp_keymaps(bufnr)
@@ -99,7 +94,8 @@ function M.config()
 
   vim.diagnostic.config(default_diagnostic_config)
 
-  require("lspconfig.ui.windows").default_options.border = "rounded"
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
   for _, server in pairs(servers) do
     local opts = {
@@ -110,10 +106,6 @@ function M.config()
     local require_ok, settings = pcall(require, "user.lspsettings." .. server)
     if require_ok then
       opts = vim.tbl_deep_extend("force", settings, opts)
-    end
-
-    if server == "lua_ls" then
-      require("neodev").setup {}
     end
 
     vim.lsp.config(server, opts)
