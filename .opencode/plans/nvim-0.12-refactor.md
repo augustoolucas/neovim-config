@@ -208,3 +208,52 @@ Bons motivos para manter cada um (não há substituto nativo equivalente):
 | `vim.treesitter` (highlight/indent nativos) | nvim-treesitter |
 | `vim.lsp.config()` / `vim.lsp.enable()` | lspconfig (parcial) |
 | `vim.lsp.status()` | fidget.nvim |
+
+---
+
+## Upgrade para Neovim 0.12.2
+
+**Versão instalada:** 0.12.2 (tarball extraído em `~/.local/nvim-linux-x86_64/`)  
+**Symlink:** `~/.local/bin/nvim` → `~/.local/nvim-linux-x86_64/bin/nvim`  
+**Rollback:** tarball antigo em `~/.config/nvim/nvim-linux-x86_64.tar.gz` (v0.11.3)
+
+### Pré-requisito
+
+```bash
+npm install -g tree-sitter-cli
+```
+Necessário para `:TSInstall` nativo do Neovim 0.12 compilar parsers.
+
+### Instalação dos parsers tree-sitter
+
+| Parser | Origem | Status |
+|--------|--------|--------|
+| lua, markdown, markdown_inline, bash, python, yaml, json | Cache do plugin antigo (`nvim-treesitter/parser/`) | ✅ |
+| html, comment, typst | `:TSInstall` nativo → `~/.local/share/nvim/site/parser/` | ✅ |
+| latex | Desnecessário (arquivos `.tex` não são usados) | ❌ ignorado |
+
+### Verificação pós-instalação
+
+```bash
+nvim --version | head -1
+nvim --headless -c "checkhealth" -c q
+```
+
+---
+
+## Status final da implementação
+
+| # | Ação | Status | Commit |
+|---|------|--------|--------|
+| 1 | Criar branch `nvim-0.12-refactor` | ✅ | — |
+| 2 | Remover comment, illuminate, modicator | ✅ | `e7e3871` |
+| 3 | Migrar treesitter → nativo | ✅ | `85fd6d9` |
+| 4 | Remover fidget | ✅ | `c70fa7a` |
+| 5 | Migrar lspconfig → native handlers | ✅ | `77a55cd` |
+| 6 | Stylua formatting | ✅ | `e56a718` |
+| 7 | Upgrade Neovim 0.11.3 → 0.12.2 | ✅ | tarball |
+| 8 | Instalar tree-sitter-cli | ✅ | npm global |
+| 9 | Instalar parsers (html, comment, typst) | ✅ | `:TSInstall` |
+| 10 | Limpeza de cache parcial (latex) | ✅ | `rm -rf ~/.cache/nvim/tree-sitter-latex` |
+| 11 | checkhealth pós-upgrade | ✅ | `e56a718` |
+| 12 | Merge branch → main | ⬜ | pendente |
