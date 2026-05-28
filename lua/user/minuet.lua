@@ -7,14 +7,16 @@ local M = {
 
 function M.config()
   require("minuet").setup {
-    provider = "openai",
+    provider = "openai_compatible",
     context_window = 1024,
-    request_timeout = 10,
+    request_timeout = 20,
     notify = "debug",
     provider_options = {
-      openai = {
-        model = "gpt-5.4-nano",
-        api_key = "PERSONAL_OPENAI_API_KEY",
+      openai_compatible = {
+        name = "OpenCode Go",
+        end_point = "https://opencode.ai/zen/go/v1/chat/completions",
+        model = "deepseek-v4-flash",
+        api_key = "OPENCODE_GO_API_KEY",
         stream = false,
         optional = {
           max_completion_tokens = 1024,
