@@ -91,7 +91,7 @@ function M.config()
       },
     },
   }
-  if vim.fn.bufname('%') ~= '' then
+  if vim.fn.bufname "%" ~= "" then
     vim.cmd.NvimTreeFindFile()
     vim.cmd.wincmd "p"
   end

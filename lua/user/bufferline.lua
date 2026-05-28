@@ -5,7 +5,7 @@ local M = {
 }
 
 function M.config()
-  require("bufferline").setup({
+  require("bufferline").setup {
     options = {
       mode = "buffers",
       separator_style = "thin",
@@ -21,7 +21,7 @@ function M.config()
         },
       },
     },
-  })
+  }
 end
 
 return M
