@@ -1,95 +1,215 @@
-```
-    ✯                              .°•    |    
-    __     °    •                __      / \   
-   / /   ____ ___  ______  _____/ /_    | O |  
-  / /   / __ `/ / / / __ \/ ___/ __ \   | O |  
- / /___/ /_/ / /_/ / / / / /__/ / / /  /| | |\ 
-/_____/\__,_/\__,_/_/ /_/\___/_/ /_/  /_(.|.)_\
-```
+# Neovim Configuration
 
-This config will provide a modular starting point for anyone looking to use Neovim as their IDE. It is meant to be simple and easy to understand and extend. Use it as a base for your own config or just take individual pieces.
+Personal Neovim IDE configuration optimized for Python development with AI-assisted coding.
 
-All the included plugins are pinned to a version that ensures they are compatible and will not update potentially introducing errors into your config. For every Neovim release I will update this repo along with the community to keep it up to date with the newest versions.
+## Prerequisites
 
-As I mentioned, this config is meant as a starting point for people new to Neovim who want a familiar IDE experience. The config has a very simple structure that makes it easy to add new plugins.
+- **Neovim 0.12+** (uses native `vim.lsp.config()`, `vim.treesitter`, `vim.snippet`)
+- **Git**
+- **A Nerd Font** ([getnf](https://github.com/ronniedroid/getnf) recommended) for icons
 
-## Install Neovim 0.9
+## Installation
 
-You can install Neovim with your package manager e.g. brew, apt, pacman etc.. bus remember that when you update your packages Neovim may be upgraded to a newer version.
+### 1. Install Neovim 0.12+
 
-If you would like to make sure Neovim only updates when you want it to than I recommend installing from source: [instructions](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-source)
-
-## Install the config
-
-Make sure to remove or backup your current `nvim` directory
+Download the latest stable tarball from [neovim/neovim releases](https://github.com/neovim/neovim/releases):
 
 ```sh
-git clone https://github.com/LunarVim/Launch.nvim.git ~/.config/nvim
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+mkdir -p ~/.local
+tar xzf nvim-linux-x86_64.tar.gz -C ~/.local
+ln -sf ~/.local/nvim-linux-x86_64/bin/nvim ~/.local/bin/nvim
 ```
 
-Run `nvim` and wait for the plugins to be installed
+Ensure `~/.local/bin` is in your `PATH`.
 
-**NOTE** (You will notice treesitter pulling in a bunch of parsers the next time you open Neovim)
+### 2. System dependencies
 
-## Get healthy
+Run the requirements script (Ubuntu/Debian):
 
-Open `nvim` and enter the following:
+```sh
+./requirements.sh
+```
+
+Or install manually:
+
+```sh
+sudo apt install -y git curl wget build-essential cmake
+sudo apt install -y nodejs npm python3 python3-pip python3-venv ripgrep fd-find
+sudo apt install -y shfmt
+
+python3 -m venv ~/.neovim-venv
+~/.neovim-venv/bin/pip install pynvim
+
+npm i -g neovim tree-sitter-cli
+```
+
+### 3. Clone the config
+
+```sh
+git clone https://github.com/<your-username>/<repo>.git ~/.config/nvim
+```
+
+### 4. First run
+
+Open Neovim:
+
+```sh
+nvim
+```
+
+**lazy.nvim** will install all plugins automatically. Tree-sitter parsers for Python, Lua, Bash, Markdown, JSON, YAML, and web languages will be installed on first use via `:TSInstall`.
+
+### 5. Environment variables
+
+These are required for AI features. Add to your shell profile (`~/.bashrc`, `~/.zshrc`):
+
+```sh
+# AI completions (minuet-ai.nvim)
+export OPENCODE_GO_API_KEY="<your-key>"
+
+# OpenAI features (codecompanion.nvim)
+export PERSONAL_OPENAI_API_KEY="<your-key>"
+
+# Python provider
+export PYTHON3_HOST_PROG="$HOME/.neovim-venv/bin/python3"
+```
+
+## Features
+
+### LSP & Completion
+- **nvim-lspconfig** with native `vim.lsp.config()` / `vim.lsp.enable()` API (Neovim 0.12)
+- **nvim-cmp** — completion engine with LuaSnip, LSP, buffer, path, and calc sources
+- **Mason** — automated LSP server installation and management
+
+### AI
+- **CodeCompanion** — OpenAI chat, inline editing, and actions
+- **Minuet** — AI-powered code completions via OpenCode Go
+- **OpenCode.nvim** — OpenCode CLI integration with snacks picker
+
+### UI
+- **onedark.nvim** — colorscheme
+- **lualine.nvim** — statusline with branch, diagnostics, filetype, progress
+- **bufferline.nvim** — buffer tabs with diagnostic indicators
+- **nvim-tree.lua** — file explorer with git status and diagnostics
+- **alpha-nvim** — startup dashboard with quick actions
+- **indent-blankline.nvim** — indentation guides with scope highlighting
+- **markview.nvim** — markdown/html/typst document preview
+- **which-key.nvim** — keymap discovery popup
+
+### Navigation & Search
+- **Telescope.nvim** — fuzzy finder (files, grep, buffers, LSP references, git branches)
+- **Harpoon** — quick file bookmarking
+- **nvim-navic** + **breadcrumbs.nvim** — LSP code context in winbar
+
+### Git
+- **gitsigns.nvim** — inline git diff signs, blame, hunk navigation and staging
+- **lazygit.nvim** — terminal-based git UI integration
+
+### Terminal
+- **toggleterm.nvim** — horizontal, vertical, and floating terminal windows
+
+### Formatting & Linting
+- **none-ls.nvim** — prettier (JSON, YAML, Markdown), shfmt (shell)
+- **Ruff LSP** — Python diagnostics, formatting, and import organization
+
+### Testing
+- **neotest** + **neotest-python** — pytest runner with inline results
+
+### Extras
+- **vim-smoothie** — smooth scrolling for `Ctrl-D`/`Ctrl-U`/`Ctrl-F`/`Ctrl-B`
+- **nvim-autopairs** — treesitter-aware auto bracket/quote pairing
+- **snacks.nvim** — enhanced input, picker, terminal, and notifications
+- **bigfile.nvim** — disables features for files >2MB to maintain performance
+
+## Keybindings
+
+Leader key: `<Space>`
+
+| Prefix | Group |
+|--------|-------|
+| `<leader>f` | Find (Telescope files, grep, buffers) |
+| `<leader>g` | Git (hunks, blame, lazygit) |
+| `<leader>l` | LSP (code actions, format, rename, diagnostics) |
+| `<leader>c` | CodeCompanion (chat, inline, actions) |
+| `<leader>o` | OpenCode (ask, select, toggle) |
+| `<leader>t` | Test (neotest run, file, debug, stop) |
+| `<leader>e` | File Explorer (nvim-tree toggle) |
+| `<leader>b` | Buffers |
+
+Press `<leader>` and wait to see all available keybindings via which-key.
+
+Additional global keymaps:
+
+| Key | Action |
+|-----|--------|
+| `Ctrl+h/j/k/l` | Window navigation |
+| `Ctrl+Arrows` | Window resize |
+| `Shift+h/l` | Previous/next buffer |
+| `Shift+q` | Close buffer |
+| `jk` / `kj` (insert) | Escape |
+| `Alt+j/k` | Move line up/down |
+
+## Language Support
+
+### Python
+- `pyright` — LSP (type checking, completions, hover)
+- `ruff` — LSP (diagnostics, formatting, import sorting)
+- `neotest-python` — pytest test runner with debugpy DAP
+- `ruff_format` via LSP code actions
+
+### Lua
+- `lua_ls` — LSP with Neovim runtime library
+- Per-project diagnostics and EmmyLua annotations
+
+### Web
+- `ts_ls` — TypeScript/JavaScript LSP
+- `eslint` — ESLint diagnostics
+- `cssls` — CSS LSP
+- `html` — HTML LSP
+- `prettier` — JSON, YAML, Markdown formatting
+
+### Shell
+- `bashls` — Bash LSP
+- `shfmt` — shell script formatting (via none-ls)
+
+### Config files (JSON, YAML)
+- `jsonls` — JSON LSP with SchemaStore support
+- `yamlls` — YAML LSP
+- `prettier` — formatting
+
+### Markdown
+- `markview.nvim` — live preview with icons
+- `prettier` — formatting
+- Native tree-sitter highlighting
+
+## Health Check
+
+Open Neovim and run:
 
 ```
 :checkhealth
 ```
 
-You'll probably notice you don't have support for copy/paste also that python and node haven't been setup
+Verify that all providers (Python, Node), LSP servers, and tree-sitter parsers report OK.
 
-So let's fix that
+## Troubleshooting
 
-First we'll fix copy/paste
+**LSP servers not starting?**
+```
+:Mason
+```
+Install missing servers manually from the Mason UI.
 
-- On mac `pbcopy` should be builtin
+**Tree-sitter errors?**
+```
+:TSInstall python lua bash markdown json yaml html css typescript
+```
 
-- On Ubuntu
+**Plugins not loading?**
+```
+:Lazy sync
+```
 
-  ```sh
-  sudo apt install xsel # for X11
-  sudo apt install wl-clipboard # for wayland
-  ```
-
-Next we need to install python support (node is optional)
-
-- Neovim python support
-
-  ```sh
-  pip install pynvim
-  ```
-
-- Neovim node support
-
-  ```sh
-  npm i -g neovim
-  ```
-
-We will also need `ripgrep` for Telescope to work:
-
-- Ripgrep
-
-  ```sh
-  sudo apt install ripgrep
-  ```
-
----
-
-**NOTE** make sure you have [node](https://nodejs.org/en/) installed, I recommend a node manager like [fnm](https://github.com/Schniz/fnm).
-
-## Fonts
-
-I recommend using the following repo to get a "Nerd Font" (Font that supports icons)
-
-[getnf](https://github.com/ronniedroid/getnf)
-
-**NOTE** Some are already setup as examples, remove them if you want
-
----
-
-> The computing scientist's main challenge is not to get confused by the complexities of his own making.
-
-\- Edsger W. Dijkstra
+**Icons showing as boxes?**
+Install a Nerd Font and configure your terminal to use it.
