@@ -14,6 +14,9 @@ function M.config()
     "pyright",
     "bashls",
     "jsonls",
+    "eslint",
+    "yamlls",
+    "ruff",
   }
 
   require("mason").setup {

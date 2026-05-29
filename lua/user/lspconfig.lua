@@ -60,7 +60,6 @@ function M.config()
     "html",
     "ts_ls",
     "eslint",
-    "ts_ls",
     "pyright",
     "bashls",
     "jsonls",

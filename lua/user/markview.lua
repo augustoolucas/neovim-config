@@ -1,6 +1,6 @@
 local M = {
   "OXY2DEV/markview.nvim",
-  lazy = false,
+  ft = { "markdown", "html", "typst" },
 }
 
 function M.config()
