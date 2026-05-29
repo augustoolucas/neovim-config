@@ -72,6 +72,7 @@ This repo uses **lazy.nvim** with a custom spec-collection pattern:
 | `.luarc` | lua-language-server workspace settings |
 | `README.md` | Project readme with installation instructions |
 | `requirements.sh` | System dependency installer |
+| `docs/` | Comprehensive config documentation (concepts, architecture, plugins, keybindings, how-to guides) |
 | `.gitignore` | Git ignore rules |
 
 ---
@@ -198,6 +199,11 @@ nvim --headless -c "lua require('plenary.test_harness').test_file('tests/foo_spe
 - Keep commits small and focused. Include a concise message explaining *why*, not only *what*.
 - Do not run destructive git commands (push, force-update, reset) without explicit approval.
 - There are no repository unit tests. If you add tests, use `plenary` and place them in `tests/`.
+- After any config change (plugin added/removed, keymap changed, option modified), review and update the relevant files in `docs/`. At minimum:
+  - `docs/keybindings.md` for keymap changes
+  - `docs/lsp.md` for LSP/server changes
+  - `docs/architecture.md` for plugin additions/removals
+  - Other domain files (`docs/ui.md`, `docs/git.md`, etc.) as applicable
 
 ---
 
