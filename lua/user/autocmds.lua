@@ -7,18 +7,11 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = {
     "netrw",
-    "Jaq",
     "qf",
     "git",
     "help",
     "man",
     "lspinfo",
-    "oil",
-    "spectre_panel",
-    "lir",
-    "DressingSelect",
-    "tsplayground",
-    "",
   },
   callback = function()
     vim.cmd [[
@@ -40,13 +33,6 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-  pattern = { "!vim" },
-  callback = function()
-    vim.cmd "checktime"
-  end,
-})
-
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   callback = function()
     vim.hl.on_yank { higroup = "Visual", timeout = 40 }
@@ -54,7 +40,7 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "gitcommit", "markdown", "NeogitCommitMessage" },
+  pattern = { "gitcommit", "markdown" },
   callback = function()
     vim.opt_local.wrap = true
     vim.opt_local.spell = true
@@ -88,7 +74,15 @@ vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter", "WinNew", "VimResized" }, 
 local lsp_hl_group = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = true })
 vim.api.nvim_create_autocmd("CursorHold", {
   group = lsp_hl_group,
-  callback = vim.lsp.buf.document_highlight,
+  callback = function()
+    local clients = vim.lsp.get_clients { bufnr = 0 }
+    for _, c in ipairs(clients) do
+      if c:supports_method "textDocument/documentHighlight" then
+        vim.lsp.buf.document_highlight()
+        break
+      end
+    end
+  end,
 })
 vim.api.nvim_create_autocmd("CursorMoved", {
   group = lsp_hl_group,
