@@ -49,7 +49,7 @@ end
 
 ### `on_attach`
 
-Fires when the LSP client successfully attaches to a buffer. Sets 5 buffer-local keymaps:
+Fires when the LSP client successfully attaches to a buffer. Sets 6 buffer-local keymaps:
 
 | Key | Action | Mode |
 |---|---|---|
@@ -57,6 +57,7 @@ Fires when the LSP client successfully attaches to a buffer. Sets 5 buffer-local
 | `gD` | Go to declaration | Normal |
 | `K` | Hover (documentation popup) | Normal |
 | `gI` | Go to implementation | Normal |
+| `gr` | Telescope lsp_references (preview) | Normal |
 | `gl` | Diagnostic float | Normal |
 | `<C-k>` | Signature help | Insert |
 
@@ -186,4 +187,5 @@ end
 | `<leader>lk` | Prev diagnostic | Jump to previous error/warning |
 | `<leader>ll` | CodeLens | Run code lens action |
 | `<leader>lq` | Quickfix | Send diagnostics to quickfix list |
-| `<leader>lr` | Rename | Rename symbol across project |
+| `<leader>lr` | References | Telescope lsp_references with file preview |
+| `<leader>lR` | Rename | Rename symbol across project |

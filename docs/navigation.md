@@ -36,7 +36,7 @@ Live grep uses `rg` (ripgrep) with:
 
 ### Dropdown themes
 
-`live_grep`, `grep_string`, `buffers`, and LSP pickers (`lsp_references`, `lsp_definitions`, `lsp_declarations`, `lsp_implementations`) all use the dropdown theme — a floating window at the top center, 60% width.
+`live_grep`, `grep_string`, `buffers`, and LSP definition pickers (`lsp_definitions`, `lsp_declarations`, `lsp_implementations`) all use the dropdown theme — a floating window at the top center, 60% width. `lsp_references` uses the default layout with file preview.
 
 ---
 

@@ -65,7 +65,8 @@ Leader key: `<Space>`
 | `<leader>lk` | Previous diagnostic |
 | `<leader>ll` | CodeLens action |
 | `<leader>lq` | Diagnostics to quickfix |
-| `<leader>lr` | Rename symbol |
+| `<leader>lr` | References (Telescope with preview) |
+| `<leader>lR` | Rename symbol |
 
 ### Buffer-local LSP keymaps
 
@@ -74,6 +75,7 @@ Leader key: `<Space>`
 | `gd` | Normal | Go to definition |
 | `gD` | Normal | Go to declaration |
 | `gI` | Normal | Go to implementation |
+| `gr` | Normal | Telescope lsp_references (preview) |
 | `K` | Normal | Hover documentation |
 | `gl` | Normal | Diagnostic float |
 | `<C-k>` | Insert | Signature help |

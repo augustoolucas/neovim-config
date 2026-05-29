@@ -120,7 +120,8 @@ Shows available keybindings when you press `<leader>` and pause. Configured grou
 | `<leader>t` | Test (neotest) |
 | `<leader>h` | Clear search highlights |
 
-**Plugin presets disabled:** operators, motions, text_objects, windows, nav, z, g — too noisy. Spelling suggestions enabled (20 max).
+**Plugin presets disabled:** operators, motions, text_objects, windows, nav — too noisy.
+**Enabled:** `z` (folding) and `g` (LSP/vim navigation). Spelling suggestions enabled (20 max).
 
 **Window:** rounded border with 2-cell padding.
 
