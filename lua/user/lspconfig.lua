@@ -94,8 +94,14 @@ function M.config()
 
   vim.diagnostic.config(default_diagnostic_config)
 
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+  vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)
+    config = vim.tbl_extend("force", config or {}, { border = "rounded" })
+    vim.lsp.handlers.hover(_, result, ctx, config)
+  end
+  vim.lsp.handlers["textDocument/signatureHelp"] = function(_, result, ctx, config)
+    config = vim.tbl_extend("force", config or {}, { border = "rounded" })
+    vim.lsp.handlers.signature_help(_, result, ctx, config)
+  end
 
   for _, server in pairs(servers) do
     local opts = {
