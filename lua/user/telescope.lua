@@ -106,7 +106,6 @@ function M.config()
       },
 
       lsp_references = {
-        theme = "dropdown",
         initial_mode = "normal",
       },
 

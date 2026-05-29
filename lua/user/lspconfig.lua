@@ -10,7 +10,7 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover({ border = 'rounded' })<CR>", opts)
   keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+  keymap(bufnr, "n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   keymap(bufnr, "i", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help({ border = 'rounded' })<CR>", opts)
 end
@@ -49,7 +49,7 @@ function M.config()
     { "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev()<cr>", desc = "Prev Diagnostic" },
     { "<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>", desc = "CodeLens Action" },
     { "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<cr>", desc = "Quickfix" },
-    { "<leader>lr", "<cmd>lua vim.lsp.buf.references()<cr>", desc = "References" },
+    { "<leader>lr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
     { "<leader>lR", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename" },
   }
 
