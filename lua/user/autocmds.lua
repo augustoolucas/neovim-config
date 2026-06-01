@@ -89,6 +89,13 @@ vim.api.nvim_create_autocmd("CursorMoved", {
   callback = vim.lsp.buf.clear_references,
 })
 
+-- Enable native tree-sitter highlighting for all filetypes with a parser
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(args)
+    pcall(vim.treesitter.start, args.buf)
+  end,
+})
+
 -- Mode-sensitive cursor line number color (replaces modicator.nvim)
 vim.api.nvim_create_autocmd("ModeChanged", {
   pattern = "*",
