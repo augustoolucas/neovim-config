@@ -54,7 +54,7 @@ Fires when the LSP client successfully attaches to a buffer. Sets 6 buffer-local
 | Key | Action | Mode |
 |---|---|---|
 | `gd` | Go to definition | Normal |
-| `gD` | Go to declaration | Normal |
+| `gD` | Go to definition in vertical split | Normal |
 | `K` | Hover (documentation popup) | Normal |
 | `gI` | Go to implementation | Normal |
 | `gr` | Telescope lsp_references (preview) | Normal |

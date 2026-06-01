@@ -73,7 +73,7 @@ Leader key: `<Space>`
 | Key | Mode | Action |
 |---|---|---|
 | `gd` | Normal | Go to definition |
-| `gD` | Normal | Go to declaration |
+| `gD` | Normal | Go to definition in vertical split |
 | `gI` | Normal | Go to implementation |
 | `gr` | Normal | Telescope lsp_references (preview) |
 | `K` | Normal | Hover documentation |
