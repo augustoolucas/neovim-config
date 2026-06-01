@@ -3,10 +3,26 @@ local M = {
   event = { "BufReadPre", "BufNewFile" },
 }
 
+local function definition_vsplit()
+  vim.lsp.buf.definition {
+    on_list = function(options)
+      if not options.items or #options.items == 0 then
+        return
+      end
+      local item = options.items[1]
+      vim.cmd "vsplit"
+      vim.cmd("edit " .. item.filename)
+      vim.api.nvim_win_set_cursor(0, { item.lnum, item.col - 1 })
+    end,
+  }
+end
+
+M.definition_vsplit = definition_vsplit
+
 local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
   local keymap = vim.api.nvim_buf_set_keymap
-  keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+  keymap(bufnr, "n", "gD", "<cmd>lua require('user.lspconfig').definition_vsplit()<CR>", opts)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover({ border = 'rounded' })<CR>", opts)
   keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
