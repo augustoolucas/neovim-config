@@ -9,18 +9,17 @@ function M.config()
   require("minuet").setup {
     provider = "openai_compatible",
     context_window = 1024,
-    request_timeout = 20,
+    request_timeout = 10,
     notify = "debug",
     provider_options = {
       openai_compatible = {
-        name = "OpenCode Go",
-        end_point = "https://opencode.ai/zen/go/v1/chat/completions",
-        model = "deepseek-v4-flash",
-        api_key = "OPENCODE_GO_API_KEY",
+        name = "LiteLLM",
+        end_point = (os.getenv "LITELLM_BASE_URL" or "") .. "/chat/completions",
+        model = "claude-sonnet-4-6",
+        api_key = "LITELLM_API_KEY",
         stream = false,
         optional = {
           max_completion_tokens = 1024,
-          reasoning_effort = "low",
         },
       },
     },
