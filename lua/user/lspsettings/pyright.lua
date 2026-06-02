@@ -1,9 +1,24 @@
 return {
-  settings = {
+  init_options = {
+    disablePullDiagnostics = true,
     python = {
-      -- Use the active Python interpreter (respects activated venv)
       pythonPath = vim.fn.exepath "python",
       analysis = {
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        diagnosticMode = "workspace",
+        autoImportCompletions = true,
+        typeCheckingMode = "basic",
+      },
+    },
+  },
+  settings = {
+    python = {
+      pythonPath = vim.fn.exepath "python",
+      analysis = {
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        diagnosticMode = "workspace",
         autoImportCompletions = true,
         typeCheckingMode = "basic",
       },
