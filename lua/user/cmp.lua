@@ -4,7 +4,7 @@ local M = {
   dependencies = {
     {
       "hrsh7th/cmp-nvim-lsp",
-      event = "InsertEnter",
+      event = { "BufReadPre", "BufNewFile" },
     },
     {
       "hrsh7th/cmp-buffer",
