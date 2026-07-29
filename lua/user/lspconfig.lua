@@ -113,6 +113,18 @@ function M.config()
     vim.lsp.handlers.signature_help(_, result, ctx, config)
   end
 
+  -- nvim-cmp uses deprecated stylize_markdown (legacy syntax). Monkey-patch it
+  -- to use the Neovim 0.12 _normalize_markdown pipeline that preserves fences
+  -- and delegates code block highlighting to treesitter.
+  vim.lsp.util.stylize_markdown = function(bufnr, contents, opts)
+    opts = opts or {}
+    local w = vim.lsp.util._make_floating_popup_size(contents, opts) or 80
+    local lines = vim.lsp.util._normalize_markdown(contents, { width = w })
+    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+    vim.bo[bufnr].filetype = "markdown"
+    vim.treesitter.start(bufnr)
+  end
+
   -- Set global LSP defaults: cmp capabilities + on_attach for all servers
   vim.lsp.config("*", {
     capabilities = require("cmp_nvim_lsp").default_capabilities(),
