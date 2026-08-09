@@ -33,6 +33,4 @@ spec "user.minuet"
 spec "user.bigfile"
 spec "user.opencode"
 spec "user.snacks"
-spec "user.dap"
-
 require "user.lazy"

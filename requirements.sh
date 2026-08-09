@@ -6,5 +6,5 @@ sudo apt autoclean && sudo apt clean
 
 python3 -m venv ~/.neovim-venv
 source ~/.neovim-venv/bin/activate
-pip3 install pynvim black debugpy
+pip3 install pynvim black
 npm i -g neovim tree-sitter-cli
