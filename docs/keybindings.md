@@ -118,6 +118,20 @@ Leader key: `<Space>`
 
 ---
 
+## `<leader>d` — Debug (nvim-dap)
+
+| Key | Action |
+|---|---|
+| `<leader>db` | Toggle breakpoint |
+| `<leader>dc` | Continue / start debugging |
+| `<leader>do` | Step over |
+| `<leader>di` | Step into |
+| `<leader>dO` | Step out |
+| `<leader>dq` | Terminate debug session |
+| `<leader>du` | Toggle dap-ui |
+
+---
+
 ## Other `<leader>` keys
 
 | Key | Plugin | Action |

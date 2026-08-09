@@ -89,6 +89,7 @@ return M
 | `cmp.lua` | nvim-cmp | Completion engine with 5 sources + LuaSnip |
 | `codecompanion.lua` | codecompanion.nvim | OpenAI chat, inline editing, actions |
 | `colorscheme.lua` | onedark.nvim | Dark theme with custom highlights |
+| `dap.lua` | nvim-dap | Python debugger (nvim-dap, dap-ui, dap-python, dap-virtual-text) |
 | `devicons.lua` | nvim-web-devicons | Filetype icon provider |
 | `gitsigns.lua` | gitsigns.nvim | Git diff signs, blame, hunk operations |
 | `harpoon.lua` | harpoon | Quick file bookmarking |

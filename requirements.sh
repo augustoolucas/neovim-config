@@ -7,7 +7,7 @@ sudo apt autoclean && sudo apt clean
 
 # Python venv for Neovim provider
 python3 -m venv ~/.neovim-venv
-~/.neovim-venv/bin/pip install pynvim
+~/.neovim-venv/bin/pip install pynvim debugpy
 
 # Global npm packages
 npm i -g neovim tree-sitter-cli
