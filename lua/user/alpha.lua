@@ -14,12 +14,12 @@ function M.config()
   end
 
   dashboard.section.header.val = {
-   [[                                                ]],
-   [[ /\ |\   _ __    ___   ___ __   __(_) _ __ ___  ]],
-   [[|  \| | | '_ \  / _ \ / _ \\ \ / /|¯|| '_ ` _ \ ]],
-   [[| . ` | | | | ||  __/| (_) |\ V / | || | | | | |]],
-   [[| |\  | |_| |_| \___| \___/  \_/  |_||_| |_| |_|]],
-   [[ \| \/                                          ]]
+    [[                                                ]],
+    [[ /\ |\   _ __    ___   ___ __   __(_) _ __ ___  ]],
+    [[|  \| | | '_ \  / _ \ / _ \\ \ / /|¯|| '_ ` _ \ ]],
+    [[| . ` | | | | ||  __/| (_) |\ V / | || | | | | |]],
+    [[| |\  | |_| |_| \___| \___/  \_/  |_||_| |_| |_|]],
+    [[ \| \/                                          ]],
   }
 
   dashboard.section.buttons.val = {
@@ -43,16 +43,6 @@ function M.config()
 
   dashboard.opts.opts.noautocmd = true
   require("alpha").setup(dashboard.opts)
-
-  vim.api.nvim_create_autocmd("User", {
-    pattern = "LazyVimStarted",
-    callback = function()
-      local stats = require("lazy").stats()
-      local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-      dashboard.section.footer.val = "Loaded " .. stats.count .. " plugins in " .. ms .. "ms"
-      pcall(vim.cmd.AlphaRedraw)
-    end,
-  })
 
   vim.api.nvim_create_autocmd({ "User" }, {
     pattern = { "AlphaReady" },

@@ -1,10 +1,13 @@
+# System packages (Ubuntu/Debian)
 sudo apt update && sudo apt -y upgrade
-sudo apt install -y nodejs npm ripgrep bat build-essential curl wget locales
-sudo apt install -y python3 python3-pip python3-venv python-is-python3 git fd-find
-sudo apt install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip git binutils 
+sudo apt install -y git curl wget build-essential cmake
+sudo apt install -y nodejs npm python3 python3-pip python3-venv ripgrep fd-find
+sudo apt install -y shfmt
 sudo apt autoclean && sudo apt clean
 
+# Python venv for Neovim provider
 python3 -m venv ~/.neovim-venv
-source ~/.neovim-venv/bin/activate
-pip3 install pynvim black
+~/.neovim-venv/bin/pip install pynvim
+
+# Global npm packages
 npm i -g neovim tree-sitter-cli

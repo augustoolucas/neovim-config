@@ -13,6 +13,13 @@ function M.config()
     style = "dark",
   }
   require("onedark").load()
+
+  vim.schedule(function()
+    local nf = vim.api.nvim_get_hl(0, { name = "NormalFloat" })
+    if nf.fg then
+      vim.api.nvim_set_hl(0, "FloatBorder", { fg = nf.fg, bg = nf.bg })
+    end
+  end)
 end
 
 return M

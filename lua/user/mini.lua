@@ -1,6 +1,6 @@
 local M = {
-  'nvim-mini/mini.nvim',
-  version = '*'
+  "nvim-mini/mini.nvim",
+  version = "*",
 }
 
 function M.config()

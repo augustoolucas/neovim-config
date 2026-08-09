@@ -4,11 +4,7 @@ local M = {
   dependencies = {
     {
       "hrsh7th/cmp-nvim-lsp",
-      event = "InsertEnter",
-    },
-    {
-      "hrsh7th/cmp-emoji",
-      event = "InsertEnter",
+      event = { "BufReadPre", "BufNewFile" },
     },
     {
       "hrsh7th/cmp-buffer",
@@ -33,9 +29,6 @@ local M = {
         "rafamadriz/friendly-snippets",
       },
     },
-    {
-      "hrsh7th/cmp-nvim-lua",
-    },
   },
 }
 
@@ -43,10 +36,6 @@ function M.config()
   local cmp = require "cmp"
   local luasnip = require "luasnip"
   require("luasnip/loaders/from_vscode").lazy_load()
-
-  vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-  vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
-  vim.api.nvim_set_hl(0, "CmpItemKindEmoji", { fg = "#FDE030" })
 
   local check_backspace = function()
     local col = vim.fn.col "." - 1
@@ -65,7 +54,7 @@ function M.config()
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-      ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+      ["<Tab>"] = cmp.mapping.confirm { select = true },
       ["<C-e>"] = cmp.mapping {
         i = cmp.mapping.abort(),
         c = cmp.mapping.close(),
@@ -105,35 +94,19 @@ function M.config()
         vim_item.kind = icons.kind[vim_item.kind]
         vim_item.menu = ({
           nvim_lsp = "",
-          nvim_lua = "",
           luasnip = "",
           buffer = "",
           path = "",
-          emoji = "",
         })[entry.source.name]
-
-        if entry.source.name == "emoji" then
-          vim_item.kind = icons.misc.Smiley
-          vim_item.kind_hl_group = "CmpItemKindEmoji"
-        end
-
-        if entry.source.name == "cmp_tabnine" then
-          vim_item.kind = icons.misc.Robot
-          vim_item.kind_hl_group = "CmpItemKindTabnine"
-        end
 
         return vim_item
       end,
     },
     sources = {
-      { name = "copilot" },
       { name = "nvim_lsp" },
       { name = "luasnip" },
-      { name = "cmp_tabnine" },
-      { name = "nvim_lua" },
       { name = "path" },
       { name = "calc" },
-      { name = "emoji" },
       {
         name = "buffer",
         option = {
@@ -154,8 +127,8 @@ function M.config()
           end,
           use_visible = true,
           use_hidden = false,
-        }
-      }
+        },
+      },
     },
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,

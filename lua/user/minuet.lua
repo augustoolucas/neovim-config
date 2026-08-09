@@ -7,18 +7,19 @@ local M = {
 
 function M.config()
   require("minuet").setup {
-    provider = "openai",
+    provider = "openai_compatible",
     context_window = 1024,
     request_timeout = 10,
     notify = "debug",
     provider_options = {
-      openai = {
-        model = "gpt-5.4-nano",
-        api_key = "PERSONAL_OPENAI_API_KEY",
+      openai_compatible = {
+        name = "LiteLLM",
+        end_point = (os.getenv "LITELLM_BASE_URL" or "") .. "/chat/completions",
+        model = "claude-sonnet-4-6",
+        api_key = "LITELLM_API_KEY",
         stream = false,
         optional = {
           max_completion_tokens = 1024,
-          reasoning_effort = "low",
         },
       },
     },

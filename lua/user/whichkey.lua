@@ -30,8 +30,8 @@ function M.config()
         text_objects = false,
         windows = false,
         nav = false,
-        z = false,
-        g = false,
+        z = true,
+        g = true,
       },
     },
     win = {
